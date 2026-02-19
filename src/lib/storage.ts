@@ -1,6 +1,7 @@
 import type { HighScore } from './types';
 
 const STORAGE_KEY = 'investor-sim-highscores';
+const SESSION_KEY = 'investor-sim-session';
 
 export const saveScore = (score: HighScore) => {
   const existing = getHighScores();
@@ -19,4 +20,26 @@ export const getHighScores = (): HighScore[] => {
   } catch (e) {
     return [];
   }
+};
+
+export const saveSession = (state: any) => {
+  localStorage.setItem(SESSION_KEY, JSON.stringify(state));
+};
+
+export const getSession = (): any | null => {
+  const stored = localStorage.getItem(SESSION_KEY);
+  if (!stored) return null;
+  try {
+    const state = JSON.parse(stored);
+    // Revive dates
+    if (state.currentDate) state.currentDate = new Date(state.currentDate);
+    if (state.startDate) state.startDate = new Date(state.startDate);
+    return state;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const clearSession = () => {
+  localStorage.removeItem(SESSION_KEY);
 };

@@ -1,9 +1,10 @@
 This is a Vitejs app in TypeScript that creates an Investor Simulator game for the web.
 
-## Current State (v0.3.2)
-The app features a fully interactive market simulation with both Historical and Random Walk modes, a persistence-based High Score system, global market progression, and an expanded list of 30+ mock stocks.
+## Current State (v0.4.0)
+The app features a fully interactive market simulation with persistent state recovery, historical and random walk modes, global market progression, and an expanded list of 30+ mock stocks.
 
 ### Key Features
+- **Session Persistence:** Browser refreshes no longer reset progress. The game automatically saves and restores state, including active trades and market date.
 - **Expanded Asset List:** 30+ stocks across NASDAQ, NYSE, LSE, and CRYPTO, featuring major S&P 500 companies.
 - **Visuals:** Highly polished Retro/CRT aesthetic with custom grid backgrounds and interactive 3D-style buttons.
 - **Multi-Exchange:** Trade across NASDAQ, NYSE, LSE, and CRYPTO (unlocked via licenses).

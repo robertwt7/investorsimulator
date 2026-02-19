@@ -2,27 +2,38 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import type { GameState, GameMode, Exchange } from '../lib/types';
 import { generateInitialStocks, nextDay, getHistoricalPrice, checkEvents, calculateDividends } from '../lib/simulation';
 import { addDays } from 'date-fns';
+import { getSession, saveSession } from '../lib/storage';
 
 const INITIAL_CASH = 10000;
 const START_DATE = new Date('1990-01-01');
 
 export const useGame = () => {
-  const [gameState, setGameState] = useState<GameState>({
-    currentDate: START_DATE,
-    cash: INITIAL_CASH,
-    initialCash: INITIAL_CASH,
-    portfolio: [],
-    stocks: generateInitialStocks(START_DATE),
-    isPlaying: false,
-    speed: 500, // ms per tick
-    gameMode: 'HISTORICAL',
-    startDate: START_DATE,
-    messages: [],
-    unlockedExchanges: ['NASDAQ'],
-    totalDividends: 0
+  const [gameState, setGameState] = useState<GameState>(() => {
+    const saved = getSession();
+    if (saved) return saved;
+    
+    return {
+      currentDate: START_DATE,
+      cash: INITIAL_CASH,
+      initialCash: INITIAL_CASH,
+      portfolio: [],
+      stocks: generateInitialStocks(START_DATE),
+      isPlaying: false,
+      speed: 500, // ms per tick
+      gameMode: 'HISTORICAL',
+      startDate: START_DATE,
+      messages: [],
+      unlockedExchanges: ['NASDAQ'],
+      totalDividends: 0
+    };
   });
 
   const timerRef = useRef<number | null>(null);
+
+  // Persist state on change
+  useEffect(() => {
+    saveSession(gameState);
+  }, [gameState]);
 
   const buyInsiderTip = () => {
     setGameState(prev => {

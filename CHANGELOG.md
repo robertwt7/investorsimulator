@@ -2,6 +2,34 @@
 
 All notable changes to the Investor Simulator project will be documented in this file.
 
+## [2026-02-19] - Persistence & Session Recovery (v0.4.0)
+
+### Added
+- **Session Persistence:** The current game state and application view (Setup/Playing/Finished) are now saved to `localStorage`.
+- **Automatic Recovery:** Refreshing the browser now restores the exact state of the game, including portfolio, cash, messages, and simulation date.
+- **Session Management:** Added `saveSession`, `getSession`, and `clearSession` utilities to `lib/storage.ts`.
+
+### Changed
+- **useGame Hook:** Now initializes from a saved session if available and persists state changes automatically.
+- **App Component:** Persists the current view state and clears sessions when returning to the main menu.
+
+## [2026-02-19] - Content Enrichment (v0.3.2)
+
+### Added
+- **Expanded Stock List:** Added 30+ diverse stocks across all exchanges, including major S&P 500 companies (NVDA, DIS, V, WMT, etc.) and more crypto assets (SOL, DOGE, XRP).
+- **Sector Variety:** Improved representation of different sectors like Energy, Consumer Goods, and Healthcare.
+
+## [2026-02-19] - Visual Overhaul (v0.3.1)
+
+### Changed
+- **Color Palette:** Refined theme with deep blacks (`#050505`) and muted greens for better contrast and reduced eye strain.
+- **CRT Effects:** Optimized flicker animation and scanlines to be less intrusive.
+- **Background:** Replaced solid black background with a CSS-generated tactical grid pattern.
+- **Component Styling:**
+    - Added 3D "press" effects to retro buttons.
+    - Improved hierarchy in Portfolio and Stock Card lists.
+    - Added decorative ASCII-style borders to the Score Screen.
+
 ## [2026-02-19] - Global Markets & Dividends (v0.3.0)
 
 ### Added
@@ -13,14 +41,6 @@ All notable changes to the Investor Simulator project will be documented in this
 ### Changed
 - **State Management:** Updated `GameState` to track `unlockedExchanges` and `totalDividends`.
 - **Simulation Engine:** Added dividend payout calculation to the game tick.
-
-## [2026-02-19] - Visual Overhaul (v0.3.1)
-...
-## [2026-02-19] - Content Enrichment (v0.3.2)
-
-### Added
-- **Expanded Stock List:** Added 30+ diverse stocks across all exchanges, including major S&P 500 companies (NVDA, DIS, V, WMT, etc.) and more crypto assets (SOL, DOGE, XRP).
-- **Sector Variety:** Improved representation of different sectors like Energy, Consumer Goods, and Healthcare.
 
 ## [2026-02-19] - Advanced Gameplay & Persistence (v0.2.0)
 
@@ -40,3 +60,11 @@ All notable changes to the Investor Simulator project will be documented in this
 ### Fixed
 - JSX syntax errors in retro UI elements (escaped `>` symbols).
 - TypeScript build errors related to unused imports and type-only imports.
+
+## [2026-02-19] - Initial Prototype (v0.1.0)
+
+### Added
+- Basic market simulation with historical and random modes.
+- Core trading mechanics (buy/sell).
+- Portfolio and market UI components.
+- Initial CRT/Retro styling.

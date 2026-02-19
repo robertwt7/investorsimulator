@@ -6,14 +6,20 @@ import { Portfolio } from './components/Portfolio';
 import { Controls } from './components/Controls';
 import { ScoreScreen } from './components/ScoreScreen';
 import { MessageLog } from './components/MessageLog';
-import { getHighScores, saveScore } from './lib/storage';
+import { getHighScores, saveScore, clearSession } from './lib/storage';
 import type { GameMode, HighScore } from './lib/types';
 import { Monitor, TrendingUp, History, Shuffle, Trophy, DollarSign, Lightbulb } from 'lucide-react';
 import { format } from 'date-fns';
 
 function App() {
   const { gameState, buyStock, sellStock, buyInsiderTip, buyExchangeLicense, togglePlay, setSpeed, startGame, endGame } = useGame();
-  const [appState, setAppState] = useState<'SETUP' | 'PLAYING' | 'FINISHED'>('SETUP');
+  const [appState, setAppState] = useState<'SETUP' | 'PLAYING' | 'FINISHED'>(() => {
+    return (localStorage.getItem('investor-sim-app-state') as any) || 'SETUP';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('investor-sim-app-state', appState);
+  }, [appState]);
 
   const handleStart = (mode: GameMode, year: number, initialCash: number) => {
     startGame(mode, year, initialCash);
@@ -53,6 +59,7 @@ function App() {
   };
 
   const handleHome = () => {
+    clearSession();
     setAppState('SETUP');
   };
 
