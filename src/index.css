@@ -1,0 +1,105 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  body {
+    @apply bg-retro-bg text-retro-text font-mono;
+    text-shadow: 0 0 2px rgba(51, 255, 0, 0.4);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    background: #0a0a0a;
+    border-left: 1px solid #33ff00;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #33ff00;
+    border: 1px solid #0a0a0a;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2adb00;
+  }
+}
+
+/* CRT Effect */
+.crt::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+.crt::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.027906; }
+  5% { opacity: 0.1; } /* Reduced flicker intensity */
+  10% { opacity: 0.04386; }
+  15% { opacity: 0.08; }
+  20% { opacity: 0.026272; }
+  25% { opacity: 0.03; }
+  30% { opacity: 0.02; }
+  35% { opacity: 0.01; }
+  40% { opacity: 0.025; }
+  45% { opacity: 0.01; }
+  50% { opacity: 0.03; }
+  55% { opacity: 0.01; }
+  60% { opacity: 0.04; }
+  65% { opacity: 0.01; }
+  70% { opacity: 0.03; }
+  75% { opacity: 0.02; }
+  80% { opacity: 0.01; }
+  85% { opacity: 0.02; }
+  90% { opacity: 0.01; }
+  95% { opacity: 0.1; }
+  100% { opacity: 0.02; }
+}
+
+.blink {
+  animation: blink-animation 1s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(42, 85, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(42, 85, 0, 0.1) 1px, transparent 1px);
+}
