@@ -25,7 +25,7 @@ export const Portfolio = ({ portfolio, stocks, onSell }: PortfolioProps) => {
            NO HOLDINGS ACQUIRED
         </div>
       ) : (
-        <div className="flex flex-col gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+        <div className="flex flex-col gap-3 flex-1 overflow-y-auto pr-2 custom-scrollbar">
           {portfolio.map(item => {
             const stock = stocks.find(s => s.symbol === item.symbol);
             if (!stock) return null;

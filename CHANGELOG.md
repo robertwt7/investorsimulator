@@ -2,6 +2,21 @@
 
 All notable changes to the Investor Simulator project will be documented in this file.
 
+## [2026-02-21] - UI/UX & Market Analysis (v0.5.0)
+
+### Added
+- **Stock Details Screen:** Deep-dive view for every stock including company descriptions, CEO information, founding dates, and detailed area charts.
+- **Financial Reports:** Mocked quarterly reports (EPS/Revenue) and real-time news feed within the stock details view.
+- **Stock Market List View:** Added a toggleable "List View" for the Stock Market, providing a more compact and manageable way to browse many stocks.
+- **Search & Filtering:** Users can now search for stocks by symbol or name in real-time.
+- **Performance Indicators:** List view now shows 30-day and 1-year (365-day) price change percentages for all stocks.
+- **Improved Insider Tips:** Insider tips now trigger a clear alert box in addition to being logged, ensuring users don't miss valuable information they've paid for.
+
+### Changed
+- **Extended History:** Increased the internal stock price history tracking from 100 to 365 days to support longer-term performance analysis.
+- **Stock Market UI:** Redesigned the Stock Market header to include search, view toggles, and improved exchange tabs.
+- **Portfolio Layout:** Fixed a layout issue where the portfolio list didn't occupy the full vertical space, improving scrollability and visual density.
+
 ## [2026-02-19] - Persistence & Session Recovery (v0.4.0)
 
 ### Added

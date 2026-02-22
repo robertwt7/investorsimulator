@@ -68,6 +68,9 @@ export const useGame = () => {
       
       const tip = `INSIDER: ${randomStock.symbol} expected to ${direction} by ~${Math.abs(diff).toFixed(1)}% in 30 days.`;
 
+      // Also show as alert as requested by user
+      window.alert(tip);
+
       return {
         ...prev,
         cash: prev.cash - COST,

@@ -9,6 +9,9 @@ export interface Stock {
   sector: 'Tech' | 'Finance' | 'Energy' | 'Consumer' | 'Crypto';
   exchange: Exchange;
   dividendRate?: number; // Annual yield (e.g., 0.02 for 2%)
+  description?: string;
+  ceo?: string;
+  founded?: number;
 }
 
 export interface PortfolioItem {

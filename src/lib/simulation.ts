@@ -8,42 +8,136 @@ const HISTORICAL_MAP = new Map(historicalData.map(item => [item.symbol, item]));
 
 const INITIAL_STOCKS_CONFIG = [
   // NASDAQ (Tech Focus)
-  { symbol: 'MSFT', name: 'Microsoft', type: 'giant', basePrice: 0.5, volatility: 0.02, exchange: 'NASDAQ', dividendRate: 0.01 },
-  { symbol: 'AAPL', name: 'Apple', type: 'giant', basePrice: 0.2, volatility: 0.03, exchange: 'NASDAQ', dividendRate: 0.005 },
-  { symbol: 'GOOGL', name: 'Google', type: 'tech_boom', basePrice: 50, volatility: 0.04, exchange: 'NASDAQ' },
-  { symbol: 'AMZN', name: 'Amazon', type: 'giant', basePrice: 1.0, volatility: 0.03, exchange: 'NASDAQ' },
-  { symbol: 'NVDA', name: 'Nvidia', type: 'tech_boom', basePrice: 0.1, volatility: 0.07, exchange: 'NASDAQ' },
-  { symbol: 'AMD', name: 'AMD', type: 'volatile_growth', basePrice: 5.0, volatility: 0.06, exchange: 'NASDAQ' },
-  { symbol: 'META', name: 'Meta', type: 'tech_boom', basePrice: 20, volatility: 0.05, exchange: 'NASDAQ' },
-  { symbol: 'NFLX', name: 'Netflix', type: 'volatile_growth', basePrice: 1.0, volatility: 0.08, exchange: 'NASDAQ' },
-  { symbol: 'TSLA', name: 'Tesla', type: 'volatile_growth', basePrice: 2.0, volatility: 0.10, exchange: 'NASDAQ' },
-  { symbol: 'COST', name: 'Costco', type: 'steady', basePrice: 30, volatility: 0.02, exchange: 'NASDAQ', dividendRate: 0.006 },
+  { 
+    symbol: 'MSFT', 
+    name: 'Microsoft', 
+    type: 'giant', 
+    basePrice: 0.5, 
+    volatility: 0.02, 
+    exchange: 'NASDAQ', 
+    dividendRate: 0.01,
+    description: 'A global leader in software, services, devices and solutions that help people and businesses realize their full potential.',
+    ceo: 'Satya Nadella',
+    founded: 1975
+  },
+  { 
+    symbol: 'AAPL', 
+    name: 'Apple', 
+    type: 'giant', 
+    basePrice: 0.2, 
+    volatility: 0.03, 
+    exchange: 'NASDAQ', 
+    dividendRate: 0.005,
+    description: 'Designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories worldwide.',
+    ceo: 'Tim Cook',
+    founded: 1976
+  },
+  { 
+    symbol: 'GOOGL', 
+    name: 'Google', 
+    type: 'tech_boom', 
+    basePrice: 50, 
+    volatility: 0.04, 
+    exchange: 'NASDAQ',
+    description: 'Alphabet Inc. is a holding company that provides search and advertising services, cloud computing, and hardware.',
+    ceo: 'Sundar Pichai',
+    founded: 1998
+  },
+  { 
+    symbol: 'AMZN', 
+    name: 'Amazon', 
+    type: 'giant', 
+    basePrice: 1.0, 
+    volatility: 0.03, 
+    exchange: 'NASDAQ',
+    description: 'Operates retail websites and focuses on e-commerce, cloud computing, online advertising, and digital streaming.',
+    ceo: 'Andy Jassy',
+    founded: 1994
+  },
+  { 
+    symbol: 'NVDA', 
+    name: 'Nvidia', 
+    type: 'tech_boom', 
+    basePrice: 0.1, 
+    volatility: 0.07, 
+    exchange: 'NASDAQ',
+    description: 'The global leader in programmable graphics processor technologies, now a titan in AI and data centers.',
+    ceo: 'Jensen Huang',
+    founded: 1993
+  },
+  { 
+    symbol: 'AMD', 
+    name: 'AMD', 
+    type: 'volatile_growth', 
+    basePrice: 5.0, 
+    volatility: 0.06, 
+    exchange: 'NASDAQ',
+    description: 'A semiconductor company that develops computer processors and related technologies for business and consumer markets.',
+    ceo: 'Lisa Su',
+    founded: 1969
+  },
+  { 
+    symbol: 'TSLA', 
+    name: 'Tesla', 
+    type: 'volatile_growth', 
+    basePrice: 2.0, 
+    volatility: 0.10, 
+    exchange: 'NASDAQ',
+    description: 'Designs, develops, manufactures, sells and leases fully electric vehicles and energy generation and storage systems.',
+    ceo: 'Elon Musk',
+    founded: 2003
+  },
   
   // NYSE (Blue Chips & Industrial)
-  { symbol: 'IBM', name: 'IBM', type: 'steady', basePrice: 25.0, volatility: 0.015, exchange: 'NYSE', dividendRate: 0.04 },
-  { symbol: 'KO', name: 'Coca-Cola', type: 'steady', basePrice: 10.0, volatility: 0.01, exchange: 'NYSE', dividendRate: 0.03 },
-  { symbol: 'JPM', name: 'JPMorgan', type: 'steady', basePrice: 20.0, volatility: 0.015, exchange: 'NYSE', dividendRate: 0.025 },
-  { symbol: 'GE', name: 'Gen Electric', type: 'steady', basePrice: 15.0, volatility: 0.02, exchange: 'NYSE', dividendRate: 0.035 },
-  { symbol: 'DIS', name: 'Disney', type: 'steady', basePrice: 12.0, volatility: 0.025, exchange: 'NYSE', dividendRate: 0.012 },
-  { symbol: 'V', name: 'Visa', type: 'giant', basePrice: 15.0, volatility: 0.02, exchange: 'NYSE', dividendRate: 0.008 },
-  { symbol: 'WMT', name: 'Walmart', type: 'steady', basePrice: 10.0, volatility: 0.015, exchange: 'NYSE', dividendRate: 0.015 },
-  { symbol: 'PG', name: 'P&G', type: 'steady', basePrice: 25.0, volatility: 0.01, exchange: 'NYSE', dividendRate: 0.022 },
-  { symbol: 'XOM', name: 'Exxon Mobil', type: 'commodity', basePrice: 15.0, volatility: 0.03, exchange: 'NYSE', dividendRate: 0.038 },
-  { symbol: 'CVX', name: 'Chevron', type: 'commodity', basePrice: 20.0, volatility: 0.03, exchange: 'NYSE', dividendRate: 0.04 },
-
-  // LSE (Global/Energy)
-  { symbol: 'BP', name: 'BP Oil', type: 'commodity', basePrice: 5.0, volatility: 0.04, exchange: 'LSE', dividendRate: 0.05 },
-  { symbol: 'HSBC', name: 'HSBC Holdings', type: 'steady', basePrice: 8.0, volatility: 0.02, exchange: 'LSE', dividendRate: 0.045 },
-  { symbol: 'AZN', name: 'AstraZeneca', type: 'steady', basePrice: 30.0, volatility: 0.02, exchange: 'LSE', dividendRate: 0.028 },
-  { symbol: 'RIO', name: 'Rio Tinto', type: 'commodity', basePrice: 40.0, volatility: 0.045, exchange: 'LSE', dividendRate: 0.06 },
-  { symbol: 'SHEL', name: 'Shell', type: 'commodity', basePrice: 25.0, volatility: 0.035, exchange: 'LSE', dividendRate: 0.04 },
+  { 
+    symbol: 'IBM', 
+    name: 'IBM', 
+    type: 'steady', 
+    basePrice: 25.0, 
+    volatility: 0.015, 
+    exchange: 'NYSE', 
+    dividendRate: 0.04,
+    description: 'International Business Machines Corporation is a multinational technology and consulting company.',
+    ceo: 'Arvind Krishna',
+    founded: 1911
+  },
+  { 
+    symbol: 'KO', 
+    name: 'Coca-Cola', 
+    type: 'steady', 
+    basePrice: 10.0, 
+    volatility: 0.01, 
+    exchange: 'NYSE', 
+    dividendRate: 0.03,
+    description: 'The Coca-Cola Company is a beverage corporation, and manufacturer, retailer, and marketer of non-alcoholic beverages.',
+    ceo: 'James Quincey',
+    founded: 1886
+  },
+  { 
+    symbol: 'JPM', 
+    name: 'JPMorgan', 
+    type: 'steady', 
+    basePrice: 20.0, 
+    volatility: 0.015, 
+    exchange: 'NYSE', 
+    dividendRate: 0.025,
+    description: 'A financial services firm and banking institution, providing investment banking, financial services for consumers and small businesses.',
+    ceo: 'Jamie Dimon',
+    founded: 1799
+  },
 
   // CRYPTO
-  { symbol: 'BTC', name: 'Bitcoin', type: 'volatile_growth', basePrice: 1.0, volatility: 0.15, exchange: 'CRYPTO' },
-  { symbol: 'ETH', name: 'Ethereum', type: 'volatile_growth', basePrice: 0.5, volatility: 0.18, exchange: 'CRYPTO' },
-  { symbol: 'SOL', name: 'Solana', type: 'volatile_growth', basePrice: 0.1, volatility: 0.25, exchange: 'CRYPTO' },
-  { symbol: 'DOGE', name: 'Dogecoin', type: 'volatile_growth', basePrice: 0.001, volatility: 0.40, exchange: 'CRYPTO' },
-  { symbol: 'XRP', name: 'Ripple', type: 'volatile_growth', basePrice: 0.2, volatility: 0.15, exchange: 'CRYPTO' },
+  { 
+    symbol: 'BTC', 
+    name: 'Bitcoin', 
+    type: 'volatile_growth', 
+    basePrice: 1.0, 
+    volatility: 0.15, 
+    exchange: 'CRYPTO',
+    description: 'The first decentralized digital currency, without a central bank or single administrator.',
+    ceo: 'Satoshi Nakamoto',
+    founded: 2009
+  },
 ];
 
 // Helper for dividends
@@ -185,7 +279,7 @@ export const nextDay = (stocks: Stock[], currentDate: Date, mode: GameMode): Sto
     return {
       ...stock,
       price: newPrice,
-      history: [...stock.history.slice(-100), { date: dateStr, price: newPrice }] // Reduce history size for performance
+      history: [...stock.history.slice(-365), { date: dateStr, price: newPrice }] // Increased to 365 for yearly view
     };
   });
 };
